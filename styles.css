@@ -1703,14 +1703,19 @@ ul {
 }
 
 .modal-image canvas {
+    position: absolute;
+    inset: 0;
     width: 100% !important;
     height: 100% !important;
 }
 
 .modal-image img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 1; /* ensure image sits above 3D canvas */
 }
 
 .modal-details {

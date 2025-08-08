@@ -963,6 +963,21 @@ function openProductModal(item) {
     document.getElementById('modalCalories').textContent = item.calories;
     document.getElementById('modalEnergy').textContent = item.energy;
 
+    // Populate image
+    const modalImageEl = document.getElementById('modalProductImage');
+    if (modalImageEl) {
+        const hasValidImage = item.image && /^https?:\/\//i.test(item.image);
+        if (hasValidImage) {
+            modalImageEl.src = item.image;
+            modalImageEl.alt = item.name;
+            modalImageEl.style.display = 'block';
+        } else {
+            modalImageEl.removeAttribute('src');
+            modalImageEl.alt = '';
+            modalImageEl.style.display = 'none';
+        }
+    }
+
     // Populate ingredients
     const ingredientsList = document.getElementById('modalIngredients');
     ingredientsList.innerHTML = '';
