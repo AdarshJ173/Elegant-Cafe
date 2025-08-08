@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Coffee & Treats - Premium Cafe Experience</title>
+    <meta name="description" content="Discover handcrafted coffee, artisan pastries, and gourmet treats. Experience our premium cafe with interactive menu and immersive 3D elements.">
+    <meta name="keywords" content="coffee, cafe, artisan, pastries, gourmet, premium, handcrafted">
+    <link rel="canonical" href="https://artisan-coffee-treats.com">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Artisan Coffee & Treats - Premium Cafe Experience">
+    <meta property="og:description" content="Discover handcrafted coffee, artisan pastries, and gourmet treats.">
+    <meta property="og:image" content="/assets/images/hero-coffee.jpg">
+    <meta property="og:url" content="https://artisan-coffee-treats.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "name": "Artisan Coffee & Treats",
+        "image": "/assets/images/hero-coffee.jpg",
+        "description": "Premium cafe serving handcrafted coffee and artisan pastries",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Coffee Street",
+            "addressLocality": "Artisan District",
+            "addressRegion": "CA",
+            "postalCode": "90210"
+        },
+        "telephone": "+1-555-COFFEE",
+        "openingHours": "Mo,Tu,We,Th,Fr 07:00-19:00 Sa,Su 08:00-20:00",
+        "servesCuisine": "Coffee, Pastries, Light Meals",
+        "priceRange": "$$"
+    }
+    </script>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="vendors/three.min.js" as="script">
+    <link rel="preload" href="vendors/gsap.min.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading-screen" class="loading-screen" aria-hidden="true">
+        <div class="coffee-loading">
+            <div class="coffee-cup"></div>
+            <div class="steam steam1"></div>
+            <div class="steam steam2"></div>
+            <div class="steam steam3"></div>
+        </div>
+        <p>Brewing your experience...</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo" aria-label="Artisan Coffee & Treats home">
+                <span class="logo-text">Artisan</span>
+            </a>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero" role="banner">
+            <div class="hero-background">
+                <div class="parallax-layer" data-speed="0.2"></div>
+                <div class="parallax-layer" data-speed="0.5"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-main">Discover Artisan</span>
+                        <span class="title-sub">Brews & Treats</span>
+                    </h1>
+                    <p class="hero-description">
+                        Experience handcrafted coffee and artisan pastries in an immersive digital journey
+                    </p>
+                    <button class="cta-button hero-cta" data-target="#menu" aria-label="Explore our menu">
+                        Explore Menu
+                        <span class="button-arrow">→</span>
+                    </button>
+                </div>
+                
+                <!-- 3D Coffee Cup Container -->
+                <div class="hero-3d" id="hero3D">
+                    <canvas id="heroCanvas"></canvas>
+                </div>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div class="floating-elements" aria-hidden="true">
+                <div class="floating-bean bean1"></div>
+                <div class="floating-bean bean2"></div>
+                <div class="floating-bean bean3"></div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" aria-label="Scroll down to explore">
+                <div class="scroll-line"></div>
+                <span class="scroll-text">Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- Menu Showcase Section -->
+        <section id="menu" class="menu-section" role="main">
+            <div class="section-container">
+                <header class="section-header">
+                    <h2 class="section-title">Our Handcrafted Menu</h2>
+                    <p class="section-subtitle">Each item tells a story of passion, quality, and artisan craftsmanship</p>
+                </header>
+                
+                <!-- Menu Categories -->
+                <div class="menu-categories" role="tablist">
+                    <button class="category-btn active" data-category="all" role="tab" aria-selected="true">All Items</button>
+                    <button class="category-btn" data-category="coffee" role="tab" aria-selected="false">Coffee</button>
+                    <button class="category-btn" data-category="pastries" role="tab" aria-selected="false">Pastries</button>
+                    <button class="category-btn" data-category="treats" role="tab" aria-selected="false">Treats</button>
+                </div>
+                
+                <!-- Menu Grid -->
+                <div class="menu-grid" id="menuGrid" role="tabpanel">
+                    <!-- Menu items will be dynamically loaded -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="about-background">
+                <div class="parallax-bg" data-speed="0.3"></div>
+            </div>
+            
+            <div class="section-container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">From Bean to Brew</h2>
+                        <div class="about-story">
+                            <p>Our journey began with a simple passion: creating the perfect cup of coffee. Every bean is carefully selected from sustainable farms, roasted to perfection, and crafted with love.</p>
+                            <p>We believe in the artistry of coffee making, where each cup tells a story of dedication, quality, and the pursuit of exceptional taste experiences.</p>
+                        </div>
+                        
+                        <!-- Journey Timeline -->
+                        <div class="journey-timeline">
+                            <div class="timeline-item" data-aos="fade-up">
+                                <div class="timeline-icon">🌱</div>
+                                <div class="timeline-content">
+                                    <h3>Sourcing</h3>
+                                    <p>Ethically sourced from premium coffee farms worldwide</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                                <div class="timeline-icon">🔥</div>
+                                <div class="timeline-content">
+                                    <h3>Roasting</h3>
+                                    <p>Artisan roasted in small batches for optimal flavor</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="timeline-icon">☕</div>
+                                <div class="timeline-content">
+                                    <h3>Crafting</h3>
+                                    <p>Expertly brewed by our passionate baristas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-visual">
+                        <div class="coffee-farm-3d" id="coffeeFarm3D">
+                            <canvas id="farmCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="section-container">
+                <header class="section-header">
+                    <h2 class="section-title">Visit Our Cafe</h2>
+                    <p class="section-subtitle">Experience the warmth and aroma of our artisan coffee house</p>
+                </header>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="info-card" data-aos="fade-up">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <h3>Location</h3>
+                                <p>123 Coffee Street<br>Artisan District, CA 90210</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="info-icon">⏰</div>
+                            <div class="info-content">
+                                <h3>Hours</h3>
+                                <p>Mon-Fri: 7:00 AM - 7:00 PM<br>Sat-Sun: 8:00 AM - 8:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="info-icon">📞</div>
+                            <div class="info-content">
+                                <h3>Contact</h3>
+                                <p>+1 (555) COFFEE<br>hello@artisancoffee.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links" data-aos="fade-up" data-aos-delay="300">
+                            <a href="#" class="social-link" aria-label="Follow us on Instagram">
+                                <span class="social-icon">📷</span>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Follow us on Facebook">
+                                <span class="social-icon">👥</span>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Follow us on Twitter">
+                                <span class="social-icon">🐦</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-map">
+                        <div class="map-container" id="mapContainer">
+                            <div class="map-placeholder">
+                                <div class="coffee-filling-animation" id="coffeeFilling">
+                                    <div class="coffee-mug">
+                                        <div class="coffee-liquid"></div>
+                                    </div>
+                                    <p>Interactive map loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">Artisan</span>
+                    <p class="footer-tagline">Crafting extraordinary coffee experiences</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Menu</h4>
+                        <ul>
+                            <li><a href="#menu">Coffee</a></li>
+                            <li><a href="#menu">Pastries</a></li>
+                            <li><a href="#menu">Treats</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>About</h4>
+                        <ul>
+                            <li><a href="#about">Our Story</a></li>
+                            <li><a href="#about">Sourcing</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Artisan Coffee & Treats. All rights reserved.</p>
+                <p>Crafted with ❤️ and lots of ☕</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-overlay" tabindex="-1"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close product details">&times;</button>
+            
+            <div class="modal-body">
+                <div class="modal-image">
+                    <canvas id="product3D"></canvas>
+                    <img id="modalProductImage" src="" alt="" loading="lazy">
+                </div>
+                
+                <div class="modal-details">
+                    <h2 id="modalTitle" class="modal-product-title"></h2>
+                    <p id="modalPrice" class="modal-product-price"></p>
+                    
+                    <div class="product-info">
+                        <div class="info-section">
+                            <h3>Ingredients</h3>
+                            <ul id="modalIngredients" class="ingredients-list"></ul>
+                        </div>
+                        
+                        <div class="info-section">
+                            <h3>Taste Profile</h3>
+                            <p id="modalTaste" class="taste-description"></p>
+                        </div>
+                        
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">Calories</span>
+                                <span id="modalCalories" class="nutrition-value"></span>
+                            </div>
+                            
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">Energy Boost</span>
+                                <span id="modalEnergy" class="nutrition-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="vendors/three.min.js"></script>
+    <script src="vendors/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
